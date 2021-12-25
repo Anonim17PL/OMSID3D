@@ -42,6 +42,9 @@ HRESULT APIENTRY hkIDirect3D9::CheckDeviceType(UINT Adapter, D3DDEVTYPE CheckTyp
 HRESULT APIENTRY hkIDirect3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS *pPresentationParameters, IDirect3DDevice9 **ppReturnedDeviceInterface)
 {
 	pPresentationParameters->MultiSampleQuality = 0; //Fix D3DERR_INVAILDCALL
+	pPresentationParameters->BackBufferCount = D3DPRESENT_BACK_BUFFERS_MAX; //Optimization & Triple Buffering
+	pPresentationParameters->BackBufferFormat = D3DFMT_UNKNOWN; //Optimization & Triple Buffering
+	pPresentationParameters->SwapEffect = D3DSWAPEFFECT_DISCARD; //Optimization & Triple Buffering
 	HRESULT hRet = m_pD3Dint->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, pPresentationParameters, ppReturnedDeviceInterface);
 	
 	if( SUCCEEDED(hRet) )

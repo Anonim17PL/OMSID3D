@@ -89,6 +89,9 @@ HRESULT APIENTRY hkIDirect3DDevice9::ColorFill(IDirect3DSurface9* pSurface,CONST
 HRESULT APIENTRY hkIDirect3DDevice9::CreateAdditionalSwapChain(D3DPRESENT_PARAMETERS *pPresentationParameters, IDirect3DSwapChain9 **ppSwapChain) 
 {
 	pPresentationParameters->MultiSampleQuality = 0; //Fix D3DERR_INVAILDCALL
+	pPresentationParameters->BackBufferCount = D3DPRESENT_BACK_BUFFERS_MAX; //Optimization & Triple Buffering
+	pPresentationParameters->BackBufferFormat = D3DFMT_UNKNOWN; //Optimization & Triple Buffering
+	pPresentationParameters->SwapEffect = D3DSWAPEFFECT_DISCARD; //Optimization & Triple Buffering
 	return m_pD3Ddev->CreateAdditionalSwapChain(pPresentationParameters, ppSwapChain);
 }
 
@@ -462,6 +465,9 @@ ULONG APIENTRY hkIDirect3DDevice9::Release()
 HRESULT APIENTRY hkIDirect3DDevice9::Reset(D3DPRESENT_PARAMETERS *pPresentationParameters) 
 {
 	pPresentationParameters->MultiSampleQuality = 0; //Fix D3DERR_INVAILDCALL
+	pPresentationParameters->BackBufferCount = D3DPRESENT_BACK_BUFFERS_MAX; //Optimization & Triple Buffering
+	pPresentationParameters->BackBufferFormat = D3DFMT_UNKNOWN; //Optimization & Triple Buffering
+	pPresentationParameters->SwapEffect = D3DSWAPEFFECT_DISCARD; //Optimization & Triple Buffering
 	m_pManager->PreReset();
 
 	HRESULT hRet = m_pD3Ddev->Reset(pPresentationParameters);
